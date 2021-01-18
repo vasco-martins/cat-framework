@@ -15,6 +15,7 @@
         }
     },
     "require": {
+        "php": ">=8.0",
         "symfony/http-foundation": "^5.2",
         "ext-pdo": "*",
         "vlucas/phpdotenv": "^5.2",
