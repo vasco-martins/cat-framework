@@ -1,0 +1,26 @@
+{
+    "name": "vascomartins/cat",
+    "description": "A simple PHP framework",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vasco Martins",
+            "email": "vascomartins37@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Cat\\": "src/Cat/"
+        }
+    },
+    "require": {
+        "symfony/http-foundation": "^5.2",
+        "ext-pdo": "*",
+        "vlucas/phpdotenv": "^5.2",
+        "robmorgan/phinx": "^0.12.4",
+        "symfony/string": "^5.2",
+        "symfony/translation-contracts": "^2.3",
+        "symfony/mime": "^5.2"
+    }
+}
