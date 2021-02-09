@@ -15,7 +15,7 @@ class Translator
 
         $file = explode('.', $key);
 
-        $translationFile = require getBasePath() . '/resources/lang/' . $file[0] . '.php';
+        $translationFile = require getBasePath() . '/resources/lang/' . self::getLanguage() . '.php';
 
         array_shift($file);
 
@@ -49,7 +49,7 @@ class Translator
 
     public static function getDefaultLanguage()
     {
-        return config('lang.default', null);
+        return config('lang.default', '');
     }
 
 

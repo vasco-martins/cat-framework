@@ -29,7 +29,8 @@ class App
         $this->loadEnvironment();
         self::getSessionInstance()->start();
         $this->loadTranslation();
-        $this->loadRoutes();;
+
+        require $this->basePath . '/routes/web.php';
 
         $router->run();
     }
@@ -56,12 +57,6 @@ class App
         if (Translator::getLanguage()) return;
 
         Translator::setLanguage(Translator::getDefaultLanguage());
-    }
-
-    private function loadRoutes()
-    {
-        require $this->basePath . '/routes/web.php';
-        //require $this->basePath . '/routes/admin.php';
     }
 
 }
