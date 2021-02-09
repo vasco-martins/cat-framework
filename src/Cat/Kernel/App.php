@@ -3,9 +3,10 @@
 namespace Cat\Kernel;
 
 
-use Dotenv\Dotenv;
+use Cat\Lang\Translator;
 use Cat\Router\Router;
 use Cat\Router\RouterException;
+use Dotenv\Dotenv;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class App
@@ -23,27 +24,44 @@ class App
      * @param Router $router
      * @throws RouterException
      */
-    public function run(Router $router) {
-        // Load .env file
-        if(file_exists($this->basePath . '/.env')) {
-            $dotenv = Dotenv::createImmutable($this->basePath);
-            $dotenv->load();
-        }
-
+    public function run(Router $router)
+    {
+        $this->loadEnvironment();
         self::getSessionInstance()->start();
-
-        require $this->basePath . '/routes/web.php';
-        require $this->basePath . '/routes/admin.php';
+        $this->loadTranslation();
+        $this->loadRoutes();;
 
         $router->run();
     }
 
-    public static function getSessionInstance() : Session {
-        if(self::$session === null) {
+    private function loadEnvironment()
+    {
+        if (!file_exists($this->basePath . '/.env')) return;
+
+        $dotenv = Dotenv::createImmutable($this->basePath);
+        $dotenv->load();
+    }
+
+    public static function getSessionInstance(): Session
+    {
+        if (self::$session === null) {
             self::$session = new Session();
         }
 
         return self::$session;
+    }
+
+    private function loadTranslation()
+    {
+        if (Translator::getLanguage()) return;
+
+        Translator::setLanguage(Translator::getDefaultLanguage());
+    }
+
+    private function loadRoutes()
+    {
+        require $this->basePath . '/routes/web.php';
+        //require $this->basePath . '/routes/admin.php';
     }
 
 }
