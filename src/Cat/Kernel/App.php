@@ -26,7 +26,7 @@ class App
      */
     public function run(Router $router)
     {
-        $this->loadEnvironment();
+        $this->getEnvironment()->load();
         self::getSessionInstance()->start();
         $this->loadTranslation();
 
@@ -35,12 +35,11 @@ class App
         $router->run();
     }
 
-    private function loadEnvironment()
+    private function getEnvironment(): Dotenv
     {
         if (!file_exists($this->basePath . '/.env')) return;
 
-        $dotenv = Dotenv::createImmutable($this->basePath);
-        $dotenv->load();
+        return Dotenv::createImmutable($this->basePath);
     }
 
     public static function getSessionInstance(): Session
