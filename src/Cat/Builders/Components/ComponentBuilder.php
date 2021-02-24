@@ -20,6 +20,11 @@ class ComponentBuilder
         $paths = explode('.', $component);
         $paths = array_map('ucfirst', $paths);
 
+        $className = end($paths);
+        $className = explode('-', $component);
+        $className = array_map('ucfirst', $paths);
+        $paths[end($paths)] = implode('', $className);
+
         return implode('\\', $paths);
     }
 
