@@ -22,8 +22,8 @@ class ComponentBuilder
 
         $className = end($paths);
         $className = explode('-', $component);
-        $className = array_map('ucfirst', $paths);
-        $paths[end($paths)] = implode('', $className);
+        $className = array_map('ucfirst', $className);
+        $paths[count($paths) - 1] = implode('', $className);
 
         return implode('\\', $paths);
     }
