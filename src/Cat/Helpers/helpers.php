@@ -274,9 +274,9 @@ if (!function_exists('truncate')) {
 
 
 if (!function_exists('component')) {
-    function component(string $path)
+    function component(string $path, array $parameters = [])
     {
-        \Cat\Builders\Components\ComponentBuilder::render($path);
+        \Cat\Builders\Components\ComponentBuilder::render($path, $parameters);
     }
 }
 
