@@ -273,3 +273,11 @@ if (!function_exists('truncate')) {
 }
 
 
+if (!function_exists('component')) {
+    function component(string $path)
+    {
+        \Cat\Builders\Components\ComponentBuilder::render($path);
+    }
+}
+
+
