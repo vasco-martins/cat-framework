@@ -9,7 +9,7 @@ class ComponentBuilder
 
     public static function render(string $component, array $parameters = [])
     {
-        $class = 'App\\Models\\Components\\' . self::convertToPath($component);
+        $class = 'App\\Components\\' . self::convertToPath($component);
 
         $instance = new $class(...$parameters);
         $instance->render();
