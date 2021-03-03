@@ -1,12 +1,10 @@
 <?php
 
 
-
 namespace Cat\Models;
 
 
 use Cat\Database\Database;
-use Cat\Database\DB;
 
 class Model
 {
@@ -51,7 +49,8 @@ class Model
     }
 
 
-    public static function where($clauses = [], string $implode = 'AND' ,string|null $orderBy = null, $sort = null){
+    public static function where($clauses = [], string $implode = 'AND', string|null $orderBy = null, $sort = null)
+    {
         $db = Database::instance();
 
         $where = implode(' ' . $implode, $clauses);
@@ -59,12 +58,12 @@ class Model
 
         $orderQ = "";
 
-        if($orderBy && $sort) {
+        if ($orderBy && $sort) {
             $orderQ = "ORDER BY $orderBy $sort";
         }
 
 
-        return  $db->query('SELECT * FROM ' . static::$table . ' WHERE ' . $where . ' '. $orderQ, get_called_class());
+        return $db->query('SELECT * FROM ' . static::$table . ' WHERE ' . $where . ' ' . $orderQ, get_called_class());
     }
 
     /**
@@ -146,14 +145,15 @@ class Model
         return $className::find($this->$field);
     }
 
-    protected function hasMany(string $className, string $field) {
+    protected function hasMany(string $className, string $field)
+    {
         $db = Database::instance();
         $pk = static::$primaryKey;
         $class = new $className();
 
-        return  $db->prepare(
+        return $db->prepare(
             'SELECT * FROM ' . $class->getTable()
-            . ' WHERE ' . $field . ' = ?',[$this->$pk], get_called_class());
+            . ' WHERE ' . $field . ' = ?', [$this->$pk], get_called_class());
     }
 
 }

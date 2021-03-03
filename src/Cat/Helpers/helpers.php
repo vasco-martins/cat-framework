@@ -2,6 +2,7 @@
 
 use JetBrains\PhpStorm\NoReturn;
 use JetBrains\PhpStorm\Pure;
+use Symfony\Component\HttpFoundation\Request;
 
 if (!function_exists('getBasePath')) {
     function getBasePath(): string
@@ -277,6 +278,13 @@ if (!function_exists('component')) {
     function component(string $path, array $parameters = [])
     {
         \Cat\Builders\Components\ComponentBuilder::render($path, $parameters);
+    }
+}
+
+if (!function_exists('request')) {
+    function request(): Request
+    {
+        return Request::createFromGlobals();
     }
 }
 
