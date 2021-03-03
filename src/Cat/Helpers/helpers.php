@@ -288,4 +288,11 @@ if (!function_exists('request')) {
     }
 }
 
+if (!function_exists('db')) {
+    function db(): \Cat\Database\Database
+    {
+        return \Cat\Database\Database::instance();
+    }
+}
+
 
