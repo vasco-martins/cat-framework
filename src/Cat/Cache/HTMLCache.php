@@ -19,7 +19,7 @@ class HTMLCache
 
     private static function getPath($key): string
     {
-        return getBasePath() . 'cache/html/cached-' . $key . '.html';
+        return getBasePath() . '/cache/html/cached-' . $key . '.html';
     }
 
     public static function end($key)
