@@ -24,15 +24,16 @@ class HTMLCache
 
     public static function end($key)
     {
-        $cached = fopen(self::getPath($key), 'w');
 
         if (!file_exists(getBasePath() . '/cache')) {
-            mkdir(dirname(getBasePath() . '/cache'), 0777, true);
+            mkdir(getBasePath() . '/cache', 0777, true);
         }
 
         if (!file_exists(getBasePath() . '/cache/html')) {
-            mkdir(dirname(getBasePath() . '/cache/html'), 0777, true);
+            mkdir(getBasePath() . '/cache/html', 0777, true);
         }
+
+        $cached = fopen(self::getPath($key), 'w');
 
         fwrite($cached, ob_get_contents());
         fclose($cached);
